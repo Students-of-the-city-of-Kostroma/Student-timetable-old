@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace TimetableOfClasses
 {
     public partial class Teachers : Form
-    {
+    {//конструктор для формы преподавателей
         public Teachers()
         {
             InitializeComponent();
