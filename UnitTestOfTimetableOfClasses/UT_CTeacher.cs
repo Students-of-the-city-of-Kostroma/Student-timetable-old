@@ -192,7 +192,7 @@ namespace UnitTestOfTimetableOfClasses
         //    bool actual = NewTeacher.AddTeacher(surname, name, middleName, academicDegree, academicRank, sizeOfTeachingExperience);
         //    //assert
         //    Assert.AreEqual(actual, expected);
-        }
+        //}
         public void TestMethod13()
         {
             //arrange
