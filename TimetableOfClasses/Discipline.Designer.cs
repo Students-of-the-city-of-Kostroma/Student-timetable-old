@@ -48,6 +48,7 @@
             this.DG_Disc.Name = "DG_Disc";
             this.DG_Disc.Size = new System.Drawing.Size(394, 156);
             this.DG_Disc.TabIndex = 0;
+            this.DG_Disc.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DG_Disc_ColumnHeaderMouseClick);
             this.DG_Disc.SelectionChanged += new System.EventHandler(this.DG_Disc_SelectionChanged);
             // 
             // Delete
@@ -66,6 +67,7 @@
             this.Kod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Kod.HeaderText = "Код";
             this.Kod.Name = "Kod";
+            this.Kod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.Kod.Width = 51;
             // 
             // Naim
@@ -73,6 +75,7 @@
             this.Naim.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Naim.HeaderText = "Наименование";
             this.Naim.Name = "Naim";
+            this.Naim.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.Naim.Width = 108;
             // 
             // Discipline
