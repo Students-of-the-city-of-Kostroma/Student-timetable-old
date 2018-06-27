@@ -33,5 +33,28 @@ namespace TimetableOfClasses
             button2.Enabled = ((DG.SelectedRows.Count > 0) && (DG.SelectedCells[0].RowIndex != DG.Rows.Count - 1));
         }
 
+        private void DG_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            
+            LibOfTimetableOfClasses.CTeacher CTeacher1 = CreateCTeacherEx();
+
+            CTeacher1.GetData(DG.Columns[e.ColumnIndex].Name, true);
+        }
+
+        private LibOfTimetableOfClasses.CTeacher CreateCTeacherEx()
+        {
+            LibOfTimetableOfClasses.CTeacher CTeacher1 = new LibOfTimetableOfClasses.CTeacher();
+
+            for (int i = 0; i < DG.RowCount; i++)
+            {
+                CTeacher1.AddTeacher(DG.Rows[i].Cells[0].Value.ToString(),
+                                     DG.Rows[i].Cells[1].Value.ToString(),
+                                     DG.Rows[i].Cells[2].Value.ToString(),
+                                     DG.Rows[i].Cells[3].Value.ToString(),
+                                     DG.Rows[i].Cells[4].Value.ToString(),
+                                     (byte)DG.Rows[i].Cells[5].Value);
+            }
+            return CTeacher1;
+        }
     }
 }

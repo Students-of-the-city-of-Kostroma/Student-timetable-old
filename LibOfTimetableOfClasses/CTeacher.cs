@@ -65,7 +65,7 @@ namespace LibOfTimetableOfClasses
             else return false;
         }
 
-        public string[,] GetData()
+        public object[,] GetData()
         {
             string[,] DataTeachers = new string[teacherList.Count + 1, sizeof(MTeacher.Keys)];
             //формируем заголовок таблицы
@@ -84,37 +84,56 @@ namespace LibOfTimetableOfClasses
         /// <param name="columnName">Сортируемая колонка</param>
         /// <param name="order">true => сортировка по возрастанию, false => сортировка по убыванию </param>
         /// <returns>Двумерный массив строк</returns>
-        public string[,] GetData(string columnName, bool order)
+        public object[,] GetData(string columnName, bool order)
         {
             int count = -1;
-            string[,] DataTechers = GetData();
+            object[,] DataTechers = GetData();
 
             if (teacherList.Count != 0)
             {
 
                 for (int j = 0; j < DataTechers.GetLength(1); j++)
                 {
-                    if (columnName == DataTechers[0, j]) //Находим и запоминаем сортируемый столбец
+                    if (columnName == DataTechers[0, j].ToString()) //Находим и запоминаем сортируемый столбец
                     { count = j; break; }
                 }
 
                 if (count != -1) // Если столбец найден
                 {
+                    int digit;
+                    bool check = int.TryParse(DataTechers[1, count].ToString(), out digit); // Смотрим на предмет содержания чисел в колонке
+                    object temp;
+
                     if (order)
                     {
                         for (int i = 1; i < DataTechers.GetLength(0) - 1; i++)
                         {
                             for (int j = i + 1; j < DataTechers.GetLength(0); j++)
                             {
-                                int rez = String.Compare(DataTechers[i, count], DataTechers[j, count]);
-                                if (rez < 0)
+                                
+                                if (!check) // Чисел в колонке нет
                                 {
-                                    string temp;
-                                    for (int p = 0; p < DataTechers.GetLength(1); p++) // Меняем строки местами
+                                    int rez = String.Compare(DataTechers[i, count].ToString(), DataTechers[j, count].ToString());
+                                    if (rez < 0)
                                     {
-                                        temp = DataTechers[i, p];
-                                        DataTechers[i, p] = DataTechers[j, p];
-                                        DataTechers[j, p] = temp;
+                                        for (int p = 0; p < DataTechers.GetLength(1); p++) // Меняем строки местами
+                                        {
+                                            temp = DataTechers[i, p];
+                                            DataTechers[i, p] = DataTechers[j, p];
+                                            DataTechers[j, p] = temp;
+                                        }
+                                    }
+                                }
+                                else // Числа есть
+                                {
+                                    if ((int)DataTechers[i, count] < (int)DataTechers[j, count])
+                                    {
+                                        for (int p = 0; p < DataTechers.GetLength(1); p++) // Меняем строки местами
+                                        {
+                                            temp = DataTechers[i, p];
+                                            DataTechers[i, p] = DataTechers[j, p];
+                                            DataTechers[j, p] = temp;
+                                        }
                                     }
                                 }
                             }
@@ -128,15 +147,29 @@ namespace LibOfTimetableOfClasses
                         {
                             for (int j = i + 1; j < DataTechers.GetLength(0); j++)
                             {
-                                int rez = String.Compare(DataTechers[i, count], DataTechers[j, count]);
-                                if (rez < 0)
+                                if (!check) // Числе в колонке нет
                                 {
-                                    string temp;
-                                    for (int p = 0; p < DataTechers.GetLength(1); p++) // Меняем строки местами
+                                    int rez = String.Compare(DataTechers[i, count].ToString(), DataTechers[j, count].ToString());
+                                    if (rez > 0)
                                     {
-                                        temp = DataTechers[i, p];
-                                        DataTechers[i, p] = DataTechers[j, p];
-                                        DataTechers[j, p] = temp;
+                                        for (int p = 0; p < DataTechers.GetLength(1); p++) // Меняем строки местами
+                                        {
+                                            temp = DataTechers[i, p];
+                                            DataTechers[i, p] = DataTechers[j, p];
+                                            DataTechers[j, p] = temp;
+                                        }
+                                    }
+                                }
+                                else // Числа есть
+                                {
+                                    if ((int)DataTechers[i, count] > (int)DataTechers[j, count])
+                                    {
+                                        for (int p = 0; p < DataTechers.GetLength(1); p++) // Меняем строки местами
+                                        {
+                                            temp = DataTechers[i, p];
+                                            DataTechers[i, p] = DataTechers[j, p];
+                                            DataTechers[j, p] = temp;
+                                        }
                                     }
                                 }
                             }
