@@ -7,7 +7,7 @@ using LibOfTimetableOfClasses;
 namespace UnitTestOfTimetableOfClasses
 {
     [TestClass]
-    class UnitTestMGroups
+    class UT_MGroup
     {
         private static MGroup G;
         [TestInitialize]

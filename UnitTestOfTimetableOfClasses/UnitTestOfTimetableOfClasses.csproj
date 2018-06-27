@@ -57,7 +57,7 @@
   <ItemGroup>
     <Compile Include="TestsForDelete.cs" />
     <Compile Include="TestsOfLib.cs" />
-    <Compile Include="UnitTestMGroups.cs" />
+    <Compile Include="UT_MGroup.cs" />
     <Compile Include="UTofStory_2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
