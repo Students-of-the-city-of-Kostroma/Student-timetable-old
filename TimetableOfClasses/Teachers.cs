@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LibOfTimetableOfClasses;
 
 namespace TimetableOfClasses
 {
@@ -16,6 +17,7 @@ namespace TimetableOfClasses
         {
             InitializeComponent();
         }
+        bool OrderOfSort = true;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,15 +37,28 @@ namespace TimetableOfClasses
 
         private void DG_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            
-            LibOfTimetableOfClasses.CTeacher CTeacher1 = CreateCTeacherEx();
+            if (DG.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Programmatic)
+            {
+                CTeacher CTeacher1 = CreateCTeacherEx();
 
-            CTeacher1.GetData(DG.Columns[e.ColumnIndex].Name, true);
+                if (OrderOfSort)
+                {
+                    object[,] DataTeachers = CTeacher1.GetData(DG.Columns[e.ColumnIndex].Name, OrderOfSort);
+                    SortCollection(DataTeachers);
+                    OrderOfSort = false;
+                }
+                else
+                {
+                    object[,] DataTeachers = CTeacher1.GetData(DG.Columns[e.ColumnIndex].Name, OrderOfSort);
+                    SortCollection(DataTeachers);
+                    OrderOfSort = true;
+                }
+            }
         }
 
-        private LibOfTimetableOfClasses.CTeacher CreateCTeacherEx()
+        private CTeacher CreateCTeacherEx()
         {
-            LibOfTimetableOfClasses.CTeacher CTeacher1 = new LibOfTimetableOfClasses.CTeacher();
+            CTeacher CTeacher1 = new CTeacher();
 
             for (int i = 0; i < DG.RowCount; i++)
             {
@@ -55,6 +70,15 @@ namespace TimetableOfClasses
                                      (byte)DG.Rows[i].Cells[5].Value);
             }
             return CTeacher1;
+        }
+
+        private void SortCollection(object[,] sortedTable)
+        {
+            for (int i = 0; i < DG.RowCount; i++)
+            {
+                for (int j = 0; j < DG.ColumnCount; j++)
+                    DG.Rows[i].Cells[j].Value = sortedTable[i + 1, j];
+            }
         }
     }
 }
