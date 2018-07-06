@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimetableOfClasses
 {
-    public class CDiscipline : CObject
+    public class CGroups : CObject
     {
         public override string[] GetColumnNames()
         {

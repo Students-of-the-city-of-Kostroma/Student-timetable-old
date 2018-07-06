@@ -4,131 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibOfTimetableOfClasses
+namespace TimetableOfClasses
 {
-    public class MAuditor
+    public class MAuditor : MObject
     {
-        /// <summary>
-        /// Перечисление полей объекта модели Аудитория
-        /// </summary>
-        public enum Keys { Id = 0, Number = 1, Floor = 2, Building = 3, Spacious = 4 }
-        Guid id;
-        /// <summary>
-        /// номер аудитории
-        /// </summary>
-        string number; 
-        /// <summary>
-        /// этаж
-        /// </summary>     
+        string number;
         byte floor;
-        /// <summary>
-             /// корпус
-             /// </summary>                 
         string building;
-        /// <summary>
-        /// вместительность аудитории
-        /// </summary>
         int spacious;
-
-        /// <summary>
-        /// Возвращает значение перечисления
-        /// </summary>
-        /// <param ключ="key"></param>
-        /// <returns></returns>
-        public object this[Keys key]
+        public MAuditor() : base()
         {
-            get
-            {
-                switch (key)
-                {
-                    case Keys.Id: return Id;
-                    case Keys.Number: return Number;
-                    case Keys.Floor: return Floor;
-                    case Keys.Building: return Building;
-                    case Keys.Spacious: return Spacious;
-                    default: return null;
-                }
-            }
+            this.keyValuePairs.Add("Number", "");
+            this.keyValuePairs.Add("Floor", "");
+            this.keyValuePairs.Add("Building", "");
+            this.keyValuePairs.Add("Spacious", "");
         }
-
-        /// <summary>
-        /// Возвращает или задает идентификатор id
-        /// </summary>
-        public Guid Id
+        public MAuditor(Guid id, string number, byte floor, string building, int spacious) : base(id)
         {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задает number - номер аудитории
-        /// </summary>
-        public string Number
-        {
-            get
-            {
-                return number;
-            }
-
-            set
-            {
-                number = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задает floor - этаж
-        /// </summary>
-        public byte Floor
-        {
-            get
-            {
-                return floor;
-            }
-
-            set
-            {
-                floor = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задает building - корпус
-        /// </summary>
-        public string Building
-        {
-            get
-            {
-                return building;
-            }
-
-            set
-            {
-                building = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задает spacious - вместительность
-        /// </summary>
-        public int Spacious
-        {
-            get
-            {
-                return spacious;
-            }
-
-            set
-            {
-                if (value > 0) spacious = value;
-            }
+            this.keyValuePairs.Add("Number", number);
+            this.keyValuePairs.Add("Floor", floor);
+            this.keyValuePairs.Add("Building", building);
+            this.keyValuePairs.Add("Spacious", spacious);
         }
     }
 }

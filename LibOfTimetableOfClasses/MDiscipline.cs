@@ -4,94 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibOfTimetableOfClasses
+namespace TimetableOfClasses
 {
-     public class MDiscipline
+    public class MDiscipline : MObject
     {
-        /// <summary>
-        /// Перечисление полей объекта модели Дисциплина
-        /// </summary>
-        public enum Keys { Id = 0, Name = 1, Code = 2 }
-        /// <summary>
-        /// Идентификатор ID
-        /// </summary>
-        Guid id;
-        /// <summary>
-        /// Название дисциплины
-        /// </summary>
         string name;
-        /// <summary>
-        /// Код дисциплины
-        /// </summary>
         string code;
-
-        /// <summary>
-        /// Возвращает значение перечисления
-        /// </summary>
-        /// <param ключ="key"></param>
-        /// <returns></returns>
-        public object this[Keys key]
+        public MDiscipline() : base()
         {
-            get
-            {
-                switch (key)
-                {
-                    case Keys.Id: return Id;
-                    case Keys.Name: return Name;
-                    case Keys.Code: return Code;
-                    default: return null;
-                }
-            }
+            this.keyValuePairs.Add("Name", "");
+            this.keyValuePairs.Add("Code", "");
         }
-
-        /// <summary>
-        /// Возвращает или задает значение ID
-        /// </summary>
-        public Guid Id
+        public MDiscipline(Guid id, string name, string code) : base(id)
         {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
+            this.keyValuePairs.Add("Name", name);
+            this.keyValuePairs.Add("Code", code);
         }
-
-        /// <summary>
-        /// Возвращает или задает значение Name - название
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задает значение Code - код
-        /// </summary>
-        public string Code
-        {
-            get
-            {
-                return code;
-            }
-
-            set
-            {
-                code = value;
-            }
-        }
-
-        
     }
 }
